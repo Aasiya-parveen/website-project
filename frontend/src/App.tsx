@@ -6,12 +6,31 @@ function App() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("Low");
 
+  const [tasks, setTasks] = useState<any[]>([]);
+
+  const handleAddTask = (e: any) => {
+
+    e.preventDefault();
+
+    const newTask = {
+      title,
+      description,
+      priority,
+    };
+
+    setTasks([...tasks, newTask]);
+
+    setTitle("");
+    setDescription("");
+    setPriority("Low");
+  };
+
   return (
     <div style={{ padding: "20px" }}>
 
       <h1>TaskFlow</h1>
 
-      <form>
+      <form onSubmit={handleAddTask}>
 
         <div>
           <input
@@ -57,17 +76,29 @@ function App() {
 
       <h2>Tasks</h2>
 
-      <div>
+      {
+        tasks.map((task, index) => (
 
-        <h3>Learn React</h3>
+          <div
+            key={index}
+            style={{
+              border: "1px solid black",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+          >
 
-        <p>Practice frontend development</p>
+            <h3>{task.title}</h3>
 
-        <p>Priority: High</p>
+            <p>{task.description}</p>
 
-        <button>Delete</button>
+            <p>Priority: {task.priority}</p>
 
-      </div>
+            <button>Delete</button>
+
+          </div>
+        ))
+      }
 
     </div>
   );
