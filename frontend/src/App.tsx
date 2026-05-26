@@ -11,9 +11,17 @@ function App() {
   const [showHighPriority, setShowHighPriority] =
     useState(false);
 
-  const handleAddTask = (e: any) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleAddTask = async (e: any) => {
 
     e.preventDefault();
+
+    setLoading(true);
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, 1000)
+    );
 
     const newTask = {
       title,
@@ -26,6 +34,8 @@ function App() {
     setTitle("");
     setDescription("");
     setPriority("Low");
+
+    setLoading(false);
   };
 
   const handleDelete = (index: number) => {
@@ -84,8 +94,12 @@ function App() {
 
         <br />
 
-        <button>
-          Add Task
+        <button disabled={loading}>
+
+          {loading
+            ? "Saving..."
+            : "Add Task"}
+
         </button>
 
       </form>
