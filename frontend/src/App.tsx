@@ -8,6 +8,9 @@ function App() {
 
   const [tasks, setTasks] = useState<any[]>([]);
 
+  const [showHighPriority, setShowHighPriority] =
+    useState(false);
+
   const handleAddTask = (e: any) => {
 
     e.preventDefault();
@@ -33,6 +36,12 @@ function App() {
 
     setTasks(updatedTasks);
   };
+
+  const filteredTasks = showHighPriority
+    ? tasks.filter(
+        (task) => task.priority === "High"
+      )
+    : tasks;
 
   return (
     <div style={{ padding: "20px" }}>
@@ -81,12 +90,24 @@ function App() {
 
       </form>
 
+      <br />
+
+      <button
+        onClick={() =>
+          setShowHighPriority(!showHighPriority)
+        }
+      >
+        {showHighPriority
+          ? "Show All Tasks"
+          : "Show High Priority"}
+      </button>
+
       <hr />
 
       <h2>Tasks</h2>
 
       {
-        tasks.map((task, index) => (
+        filteredTasks.map((task, index) => (
 
           <div
             key={index}
