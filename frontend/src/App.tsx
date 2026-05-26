@@ -54,97 +54,144 @@ function App() {
     : tasks;
 
   return (
-    <div style={{ padding: "20px" }}>
 
-      <h1>TaskFlow</h1>
+    <div className="dashboard">
 
-      <form onSubmit={handleAddTask}>
+      <div className="sidebar">
 
-        <div>
-          <input
-            type="text"
-            placeholder="Enter Task Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+        <h2>TaskFlow</h2>
+
+        <p>Manage your tasks smartly 🚀</p>
+
+      </div>
+
+      <div className="main-content">
+
+        <div className="top-section">
+
+          <div className="stats-card">
+            <h3>Total Tasks</h3>
+            <p>{tasks.length}</p>
+          </div>
+
+          <div className="stats-card">
+            <h3>High Priority</h3>
+
+            <p>
+              {
+                tasks.filter(
+                  (task) => task.priority === "High"
+                ).length
+              }
+            </p>
+          </div>
+
         </div>
 
-        <br />
+        <div className="form-container">
 
-        <div>
-          <textarea
-            placeholder="Enter Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-        </div>
+          <h1>Create Task</h1>
 
-        <br />
+          <form onSubmit={handleAddTask}>
 
-        <div>
-          <select
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-          >
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
-        </div>
+            <input
+              type="text"
+              placeholder="Enter Task Title"
+              value={title}
+              onChange={(e) =>
+                setTitle(e.target.value)
+              }
+            />
 
-        <br />
+            <textarea
+              placeholder="Enter Description"
+              value={description}
+              onChange={(e) =>
+                setDescription(e.target.value)
+              }
+            ></textarea>
 
-        <button disabled={loading}>
+            <select
+              value={priority}
+              onChange={(e) =>
+                setPriority(e.target.value)
+              }
+            >
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
 
-          {loading
-            ? "Saving..."
-            : "Add Task"}
+            <button disabled={loading}>
 
-        </button>
+              {
+                loading
+                  ? "Saving..."
+                  : "Add Task"
+              }
 
-      </form>
-
-      <br />
-
-      <button
-        onClick={() =>
-          setShowHighPriority(!showHighPriority)
-        }
-      >
-        {showHighPriority
-          ? "Show All Tasks"
-          : "Show High Priority"}
-      </button>
-
-      <hr />
-
-      <h2>Tasks</h2>
-
-      {
-        filteredTasks.map((task, index) => (
-
-          <div
-            key={index}
-            style={{
-              border: "1px solid black",
-              padding: "10px",
-              marginBottom: "10px",
-            }}
-          >
-
-            <h3>{task.title}</h3>
-
-            <p>{task.description}</p>
-
-            <p>Priority: {task.priority}</p>
-
-            <button onClick={() => handleDelete(index)}>
-              Delete
             </button>
 
-          </div>
-        ))
-      }
+          </form>
+
+          <button
+            className="filter-btn"
+            onClick={() =>
+              setShowHighPriority(
+                !showHighPriority
+              )
+            }
+          >
+
+            {
+              showHighPriority
+                ? "Show All Tasks"
+                : "Show High Priority"
+            }
+
+          </button>
+
+        </div>
+
+        <div className="tasks-section">
+
+          <h2>Your Tasks</h2>
+
+          {
+            filteredTasks.map((task, index) => (
+
+              <div
+                key={index}
+                className="task-card"
+              >
+
+                <div>
+
+                  <h3>{task.title}</h3>
+
+                  <p>{task.description}</p>
+
+                  <span className="priority">
+                    {task.priority}
+                  </span>
+
+                </div>
+
+                <button
+                  onClick={() =>
+                    handleDelete(index)
+                  }
+                >
+                  Delete
+                </button>
+
+              </div>
+            ))
+          }
+
+        </div>
+
+      </div>
 
     </div>
   );
