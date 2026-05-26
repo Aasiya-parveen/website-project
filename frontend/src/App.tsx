@@ -25,6 +25,15 @@ function App() {
     setPriority("Low");
   };
 
+  const handleDelete = (index: number) => {
+
+    const updatedTasks = tasks.filter(
+      (_, i) => i !== index
+    );
+
+    setTasks(updatedTasks);
+  };
+
   return (
     <div style={{ padding: "20px" }}>
 
@@ -94,7 +103,9 @@ function App() {
 
             <p>Priority: {task.priority}</p>
 
-            <button>Delete</button>
+            <button onClick={() => handleDelete(index)}>
+              Delete
+            </button>
 
           </div>
         ))
