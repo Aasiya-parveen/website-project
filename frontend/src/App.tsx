@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 function App() {
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("Low");
+
   return (
     <div style={{ padding: "20px" }}>
 
@@ -10,6 +17,8 @@ function App() {
           <input
             type="text"
             placeholder="Enter Task Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
@@ -18,13 +27,18 @@ function App() {
         <div>
           <textarea
             placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
 
         <br />
 
         <div>
-          <select>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
             <option>Low</option>
             <option>Medium</option>
             <option>High</option>
