@@ -1,0 +1,11 @@
+[33mcommit d17cb204f242041f5513d999553b576e04f68e2c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: unknown <rabiaahmed00111@gmail.com>
+Date:   Sat May 30 21:55:22 2026 +0500
+
+    Add task model routes and get API
+
+ backend/src/controllers/taskController.ts | 26 [32m++++++++++++++++++++++++++[m
+ backend/src/models/Task.ts                | 23 [32m+++++++++++++++++++++++[m
+ backend/src/routes/taskRoutes.ts          |  9 [32m+++++++++[m
+ backend/src/server.ts                     |  2 [32m++[m
+ 4 files changed, 60 insertions(+)
