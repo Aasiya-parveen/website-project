@@ -38,13 +38,16 @@ useEffect(() => {
       setTimeout(resolve, 1000)
     );
 
-    const newTask = {
-      title,
-      description,
-      priority,
-    };
+   await axios.post(
+  "http://localhost:5000/tasks",
+  {
+    title,
+    description,
+    priority,
+  }
+);
 
-    setTasks([...tasks, newTask]);
+fetchTasks();
 
     setTitle("");
     setDescription("");
