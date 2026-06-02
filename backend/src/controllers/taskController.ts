@@ -6,7 +6,18 @@ export const getTasks = async (
   res: Response
 ): Promise<void> => {
   try {
-    const tasks = await Task.find();
+    const { priority } = req.query;
+
+    let filter = {};
+
+    if (priority) {
+      filter = {
+        priority: priority,
+      };
+    }
+
+    const tasks = await Task.find(filter);
+
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: "Error fetching tasks" });
@@ -40,4 +51,4 @@ export const deleteTask = async (
       message: "Error deleting task",
     });
   }
-};
+}
