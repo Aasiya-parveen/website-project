@@ -56,14 +56,17 @@ fetchTasks();
     setLoading(false);
   };
 
-  const handleDelete = (index: number) => {
-
-    const updatedTasks = tasks.filter(
-      (_, i) => i !== index
+  const handleDelete = async (id: string) => {
+  try {
+    await axios.delete(
+      `http://localhost:5000/tasks/${id}`
     );
 
-    setTasks(updatedTasks);
-  };
+    await fetchTasks();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   const filteredTasks = showHighPriority
     ? tasks.filter(
@@ -176,10 +179,10 @@ fetchTasks();
           <h2>Your Tasks</h2>
 
           {
-            filteredTasks.map((task, index) => (
+            filteredTasks.map((task) => (
 
               <div
-                key={index}
+               key={task._id}
                 className="task-card"
               >
 
@@ -197,7 +200,7 @@ fetchTasks();
 
                 <button
                   onClick={() =>
-                    handleDelete(index)
+                    handleDelete(task._id)
                   }
                 >
                   Delete
